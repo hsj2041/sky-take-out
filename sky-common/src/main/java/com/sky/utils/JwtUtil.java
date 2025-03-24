@@ -50,6 +50,7 @@ public class JwtUtil {
         Claims claims = Jwts.parser()
                 // 设置签名的秘钥
                 .setSigningKey(secretKey.getBytes(StandardCharsets.UTF_8))
+                .build()
                 // 设置需要解析的jwt
                 .parseClaimsJws(token).getBody();
         return claims;
