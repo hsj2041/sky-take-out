@@ -6,6 +6,7 @@ import com.sky.vo.OrderReportVO;
 import com.sky.vo.SalesTop10ReportVO;
 import com.sky.vo.TurnoverReportVO;
 import com.sky.vo.UserReportVO;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 @RestController
@@ -57,4 +59,10 @@ public class ReportController {
         log.info("begin:{},end:{}", begin, end);
         return Result.success(reportService.getSalesTop10(begin, end));
     }
+
+    @GetMapping("/export")
+    public void export(HttpServletResponse response) throws IOException {
+         reportService.exportBusinessData(response);
+    }
+
 }
